@@ -1,0 +1,8 @@
+Filepath,Line Number,Line Text
+./pokeemerald/include/constants/species.h,239,#define SPECIES_SMEARGLE 235
+./pokeemerald/sound/cry_tables.inc,237,	cry Cry_Smeargle
+./pokeemerald/sound/cry_tables.inc,628,	cry_reverse Cry_Smeargle
+./pokeemerald/sound/direct_sound_data.inc,1326,Cry_Smeargle::
+./pokeemerald/sound/direct_sound_data.inc,1327,"	.incbin ""sound/direct_sound_samples/cries/smeargle.bin"""
+./pokeemerald/src/data/pokemon/pokedex_text.h,1411,const u8 gSmearglePokedexText[] = _(
+./pokeemerald/src/data/pokemon/pokedex_text.h,1412,"    ""A SMEARGLE marks its territory using a\n"""

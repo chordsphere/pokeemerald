@@ -1,0 +1,35 @@
+this is in ./pokeemerald/src/battle_script_commands.c
+idea for set type to attacker
+static void Cmd_settypetotargettype(void)
+{
+    u8 target = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT); // Adjust as necessary if there are multiple opponents or based on how you identify the target.
+    u8 targetType1 = gBattleMons[target].type1;
+    u8 targetType2 = gBattleMons[target].type2;
+
+    if (targetType1 != TYPE_NONE)
+    {
+        SET_BATTLER_TYPE(gBattlerAttacker, targetType1); // Setting the first type
+        if(targetType2 != TYPE_NONE && targetType2 != targetType1) 
+        {
+            // Logic for setting a secondary type if needed
+            SET_BATTLER_TYPE_SECONDARY(gBattlerAttacker, targetType2); 
+            // Note: Assuming you have a function similar to SET_BATTLER_TYPE for secondary types.
+            // If not, you might need to modify the data structures to support dual types.
+        }
+        gBattlescriptCurrInstr += 5; // This advances the battlescript instruction by 5 bytes, similar to the original function.
+    }
+    else
+    {
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    }
+}
+
+so far I need to update the following areas:
+
+probably ./pokeemerald//asm/macros/battle_script.inc, it's the macros
+add BattleScript_EffectMOVENAME to ./pokeemerald//data/battle_scripts_1.s
+
+./pokeemerald//data/battle_scripts_1.s:234:     .4byte BattleScript_EffectCamouflage             @ EFFECT_CAMOUFLAGE
+./pokeemerald//include/constants/battle_move_effects.h:217:#define EFFECT_CAMOUFLAGE 213
+
+possibly ./pokeemerald//data/battle_ai_scripts.s:1753:   .byte EFFECT_CAMOUFLAGE
